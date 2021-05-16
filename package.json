@@ -1,0 +1,19 @@
+{
+  "name": "cashscript-playground",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "esbuild app.jsx --bundle --outfile=out.js"
+  },
+  "volta": {
+    "node": "14.17.0",
+    "yarn": "1.22.10"
+  },
+  "dependencies": {
+    "cashc": "^0.6.3",
+    "cashscript": "^0.6.3",
+    "esbuild": "^0.11.23",
+    "global": "^4.4.0"
+  }
+}
