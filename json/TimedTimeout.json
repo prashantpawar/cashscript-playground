@@ -1,0 +1,46 @@
+{
+  "contractName": "TransferWithTimeout",
+  "constructorInputs": [
+    {
+      "name": "sender",
+      "type": "pubkey"
+    },
+    {
+      "name": "recipient",
+      "type": "pubkey"
+    },
+    {
+      "name": "timeout",
+      "type": "int"
+    }
+  ],
+  "abi": [
+    {
+      "name": "transfer",
+      "covenant": false,
+      "inputs": [
+        {
+          "name": "recipientSig",
+          "type": "sig"
+        }
+      ]
+    },
+    {
+      "name": "timeout",
+      "covenant": false,
+      "inputs": [
+        {
+          "name": "senderSig",
+          "type": "sig"
+        }
+      ]
+    }
+  ],
+  "bytecode": "OP_3 OP_PICK OP_0 OP_NUMEQUAL OP_IF OP_4 OP_ROLL OP_ROT OP_CHECKSIG OP_NIP OP_NIP OP_NIP OP_ELSE OP_3 OP_ROLL OP_1 OP_NUMEQUALVERIFY OP_3 OP_ROLL OP_SWAP OP_CHECKSIGVERIFY OP_SWAP OP_CHECKLOCKTIMEVERIFY OP_2DROP OP_1 OP_ENDIF",
+  "source": "pragma cashscript ^0.6.0;\n\ncontract TransferWithTimeout(pubkey sender, pubkey recipient, int timeout) {\n    // Allow the recipient to claim their received money\n    function transfer(sig recipientSig) {\n        require(checkSig(recipientSig, recipient));\n    }\n\n    // Allow the sender to reclaim their sent money after the timeout is reached\n    function timeout(sig senderSig) {\n        require(checkSig(senderSig, sender));\n        require(tx.time >= timeout);\n    }\n}",
+  "compiler": {
+    "name": "cashc",
+    "version": "0.6.3"
+  },
+  "updatedAt": "2021-05-16T17:44:00.325Z"
+}

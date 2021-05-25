@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "esbuild app.jsx --bundle --outfile=out.js"
+    "build": "rescript",
+    "clean": "rescript clean -with-deps",
+    "start": "rescript build -w"
   },
   "volta": {
     "node": "14.17.0",
@@ -14,6 +16,7 @@
     "cashc": "^0.6.3",
     "cashscript": "^0.6.3",
     "esbuild": "^0.11.23",
-    "global": "^4.4.0"
+    "global": "^4.4.0",
+    "rescript": "^9.1.2"
   }
 }
